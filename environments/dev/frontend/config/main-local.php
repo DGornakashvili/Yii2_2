@@ -3,8 +3,19 @@
 $config = [
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '',
+            'cookieValidationKey' => $params['cookieValidationKey'],
+        ],
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity', 'httpOnly' => true, 'domain' => $params['cookieDomain']],
+        ],
+        'session' => [
+            'name' => 'advanced',
+            'cookieParams' =>[
+                'httpOnly' => true,
+                'domain' => $params['cookieDomain'],
+            ]
         ],
     ],
 ];

@@ -36,6 +36,10 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
+        ['label' => 'Lang', 'items' => [
+            ['label' => 'ru', 'url' => ['/site/set-language', 'language' => 'ru']],
+            ['label' => 'en', 'url' => ['/site/set-language', 'language' => 'en']],
+        ]],
         ['label' => 'Home', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {

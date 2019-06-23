@@ -43,7 +43,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
@@ -205,5 +205,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+    
+    public static function getUsers()
+    {
+        return self::find()
+            ->select('username')
+            ->asArray()
+            ->indexBy('id')
+            ->column();
     }
 }

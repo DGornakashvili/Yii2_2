@@ -1,8 +1,9 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
 
+use yii\web\View;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -36,6 +37,11 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
+        ['label' => 'Lang', 'items' => [
+            ['label' => 'ru', 'url' => ['/site/set-language', 'language' => 'ru']],
+            ['label' => 'en', 'url' => ['/site/set-language', 'language' => 'en']],
+        ]],
+        ['label' => 'Tasks', 'url' => ['/task']],
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
