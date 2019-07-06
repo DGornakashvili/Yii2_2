@@ -1,0 +1,16 @@
+suite_namespace: frontend\tests\acceptance
+actor: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://front.yii.local/
+            window_size: false
+            port: 9515
+            browser: chrome
+        #- PhpBrowser:
+        #    url: http://forntend.yii.local/
+        #- WebDriver:
+        #    url: http://localhost:8080
+        #    browser: firefox
+        - Yii2:
+            part: initcoc
