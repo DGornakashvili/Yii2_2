@@ -6,7 +6,7 @@ $(document).ready(function () {
 	}
 	var webSocket = new WebSocket('ws://front.yii.local:8080?taskId=' + taskId);
 
-	$('#w1').on('submit', function (e) {
+	$('#comments-form').on('submit', function (e) {
 			e.preventDefault();
 
 			var data = {

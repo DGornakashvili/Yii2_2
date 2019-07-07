@@ -3,10 +3,12 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\base\Exception;
 use common\models\User;
 use common\models\Tasks;
+use yii\web\Response;
 use yii\web\UploadedFile;
 use common\models\Comments;
 use yii\filters\AccessControl;
@@ -88,6 +90,7 @@ class TaskController extends Controller
     
     /**
      * @param $id
+     * @return string
      */
     public function actionSave($id)
     {
@@ -98,7 +101,15 @@ class TaskController extends Controller
             $model->save();
         }
         
-        $this->redirect(Yii::$app->request->referrer);
+        return $this->renderAjax(
+            '_task',
+            [
+                'model' => $model,
+                'statuses' => TaskStatuses::getStatuses(),
+                'users' => User::getUsers(),
+                'userId' => Yii::$app->user->id,
+            ]
+        );
     }
     
     /**
@@ -129,6 +140,11 @@ class TaskController extends Controller
             $model->save();
         }
         
-        $this->redirect(Yii::$app->request->referrer);
+        return $this->renderAjax('_upload',
+            [
+                'model' => Tasks::findOne($model->taskId),
+                'attachmentsForm' => new AttachmentsForm(),
+            ]
+        );
     }
 }
