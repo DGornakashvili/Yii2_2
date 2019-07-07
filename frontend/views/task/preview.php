@@ -114,3 +114,6 @@ TaskPreviewAsset::register($this);
 		<?php endforeach; ?>
     </div>
 </div>
+<script>
+    var taskId = '<?=$model->id?>';
+</script>

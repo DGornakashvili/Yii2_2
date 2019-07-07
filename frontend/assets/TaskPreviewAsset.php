@@ -12,6 +12,10 @@ class TaskPreviewAsset extends AssetBundle
 	public $css = [
 		'css/taskPreview.css',
 	];
+	
+	public $js = [
+	    'js/chat.js'
+    ];
 
 	public $depends = [
 		'frontend\assets\AppAsset',
