@@ -24,6 +24,7 @@ use yii\db\ActiveRecord;
  * @property User $creator
  * @property User $responsible
  * @property TaskStatuses $status
+ * @property Projects $project
  */
 class Tasks extends ActiveRecord
 {
@@ -43,12 +44,13 @@ class Tasks extends ActiveRecord
         return [
             [['name'], 'required'],
             [['deadline', 'created', 'updated'], 'safe'],
-            [['creator_id', 'responsible_id', 'status_id'], 'integer'],
+            [['creator_id', 'responsible_id', 'status_id', 'project_id'], 'integer'],
             [['name'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 255],
             [['creator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['creator_id' => 'id']],
             [['responsible_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['responsible_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => TaskStatuses::class, 'targetAttribute' => ['status_id' => 'id']],
+            [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::class, 'targetAttribute' => ['project_id' => 'id']],
         ];
     }
 
@@ -65,6 +67,7 @@ class Tasks extends ActiveRecord
             'responsible_id' => Yii::t('app', 'task_responsible'),
             'deadline' => Yii::t('app', 'task_deadline'),
             'status_id' => Yii::t('app', 'task_status'),
+            'project_id' => 'Project ID',
             'created' => 'Created',
             'updated' => 'Updated',
         ];
@@ -108,5 +111,13 @@ class Tasks extends ActiveRecord
     public function getStatus()
     {
         return $this->hasOne(TaskStatuses::class, ['id' => 'status_id']);
+    }
+    
+    /**
+     * @return ActiveQuery
+     */
+    public function getProject()
+    {
+        return $this->hasOne(Projects::class, ['id' => 'project_id']);
     }
 }
